@@ -101,7 +101,8 @@
             </button>
           </div>
 
-        <div class="container text-center d-flex flex-column justify-content-center" style="min-height: 100vh;">
+        <div style="background-image: url({{ asset('img/bg-image-placeholder.jpg') }}); ">
+        <div class="container text-center d-flex flex-column justify-content-center text-white" style="min-height: 100vh; ">
             <div class="my-3">
                 <h2>
                     Who We Are?
@@ -113,7 +114,7 @@
                 </p>
             </div>
             <div>
-                <a href="#" type="button" class="w-25 btn btn-outline-primary">See Detail</a>
+                <a href="#" type="button" class="w-25 btn btn-primary">See Detail</a>
             </div>
             <div class="row mt-5">
                 @for ($i = 0; $i < 4; $i++)
@@ -135,6 +136,7 @@
                 @endfor
             </div>
         </div>
+    </div>
 
         <div class="container text-center d-flex flex-column justify-content-center" style="min-height: 100vh;">
             <h2>
@@ -176,7 +178,8 @@
             </div>
         </div>
 
-        <div class="container text-center d-flex flex-column justify-content-center" style="min-height: 100vh;">
+        <div style="background-image: url({{ asset('img/bg-image-placeholder.jpg') }}); ">
+        <div class="container text-center d-flex flex-column justify-content-center text-white" style="min-height: 100vh;">
             <h2>
                 Latest Information
             </h2>
@@ -196,8 +199,9 @@
                 @endfor
             </div>
             <div>
-                <a href="#" class="btn btn-outline-primary mt-5 w-25">Read More</a>
+                <a href="#" class="btn btn-primary mt-5 w-25">Read More</a>
             </div>
+        </div>
         </div>
 
         <div class="container my-5">
@@ -251,11 +255,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    @for ($i = 0; $i < 6; $i++)
-                        <div class="col-2">
-                            <i class='bx bx-male-female' style="font-size: 50px;"></i>
-                        </div>
-                    @endfor
+                    <div class="col-2">
+                        <i class='bx bxl-instagram' style="font-size: 50px"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class='bx bxl-facebook' style="font-size: 50px"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class='bx bxl-linkedin' style="font-size: 50px"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class='bx bxl-twitter'style="font-size: 50px"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class='bx bxl-youtube'style="font-size: 50px"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class='bx bxl-tiktok' style="font-size: 50px"></i>
+                    </div>
                 </div>
             </div>
         </footer>

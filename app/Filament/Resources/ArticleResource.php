@@ -12,6 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\RichEditor;
+
 
 class ArticleResource extends Resource
 {
@@ -23,7 +27,20 @@ class ArticleResource extends Resource
     {
         return $form
             ->schema([
-                //
+                FileUpload::make('image')
+                                ->image()
+                                ->imageEditor()
+                                ->required(),
+                Forms\Components\TextInput::make('title')
+                    ->required(),
+                Forms\Components\Textarea::make('short_description')
+                    ->required()
+                    ->maxLength(255)
+                    ->autosize()
+                    ->columnSpan('full'),
+                RichEditor::make('description')
+                    ->required()
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -31,7 +48,13 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('short_description'),
+                ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('created_by.name'),
+                Tables\Columns\TextColumn::make('updated_by.name'),
+                Tables\Columns\TextColumn::make('created_at'),
+                Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
                 //

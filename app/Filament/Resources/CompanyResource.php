@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class CompanyResource extends Resource
 {
@@ -23,7 +25,32 @@ class CompanyResource extends Resource
     {
         return $form
             ->schema([
-                //
+                FileUpload::make('image')
+                                ->image()
+                                ->imageEditor()
+                                ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required(),
+                Forms\Components\TextInput::make('phone_number')
+                    ->numeric()
+                    ->required(),
+                Forms\Components\TextInput::make('fax')
+                    ->nullable(),
+                Forms\Components\TextInput::make('instagram_url')
+                    ->nullable(),
+                Forms\Components\TextInput::make('facebook_url')
+                    ->nullable(),
+                Forms\Components\TextInput::make('twitter_url')
+                    ->nullable(),
+                Forms\Components\TextInput::make('linkedin_url')
+                    ->nullable(),
+                Forms\Components\TextInput::make('youtube_url')
+                    ->nullable(),
+                Forms\Components\TextInput::make('tiktok_url')
+                    ->nullable(),
             ]);
     }
 
@@ -31,7 +58,14 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('phone_number'),
+                ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('created_by.name'),
+                Tables\Columns\TextColumn::make('updated_by.name'),
+                Tables\Columns\TextColumn::make('created_at'),
+                Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
                 //

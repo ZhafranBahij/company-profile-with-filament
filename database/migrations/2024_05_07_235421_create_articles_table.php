@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('short_description')->nullable();
             $table->longText('description')->nullable();
-            $table->foreignId('created_by')->constrained('users');
-            $table->foreignId('updated_by')->constrained('users');
+            $table->foreignId('created_by_id')->constrained('users');
+            $table->foreignId('updated_by_id')->constrained('users');
             $table->timestamps();
         });
     }

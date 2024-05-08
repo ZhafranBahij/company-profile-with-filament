@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
-            $table->foreignId('created_by')->constrained('users');
-            $table->foreignId('updated_by')->constrained('users');
+            $table->foreignId('created_by_id')->constrained('users');
+            $table->foreignId('updated_by_id')->constrained('users');
             $table->timestamps();
         });
     }

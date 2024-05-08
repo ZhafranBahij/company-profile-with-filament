@@ -25,10 +25,10 @@ class BannerResource extends Resource
     {
         return $form
             ->schema([
-    FileUpload::make('image')
-                    ->image()
-                    ->imageEditor()
-                    ->required(),
+                FileUpload::make('image')
+                                ->image()
+                                ->imageEditor()
+                                ->required(),
                 Forms\Components\TextInput::make('title')
                     ->nullable(),
                 Forms\Components\Textarea::make('description')

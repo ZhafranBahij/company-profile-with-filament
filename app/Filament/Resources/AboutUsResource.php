@@ -23,7 +23,13 @@ class AboutUsResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')
+                    ->nullable(),
+                Forms\Components\Textarea::make('description')
+                    ->nullable()
+                    ->maxLength(255)
+                    ->autosize()
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -31,7 +37,12 @@ class AboutUsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('created_by.name'),
+                Tables\Columns\TextColumn::make('updated_by.name'),
+                Tables\Columns\TextColumn::make('created_at'),
+                Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
                 //

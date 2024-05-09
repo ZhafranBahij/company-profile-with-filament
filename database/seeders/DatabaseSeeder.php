@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'trueadmin',
             'email' => 'trueadmin@gmail.com',
             'password' => 'neotrueadmin123',
+            'role' => 'true admin',
         ]);
 
         User::factory()->create([
             'name' => 'kirakira4141',
             'email' => 'kirakira4141@gmail.com',
             'password' => 'kirakira4141',
+            'role' => 'admin',
         ]);
     }
 }

@@ -44,7 +44,7 @@ class BannerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('description'),
+                // Tables\Columns\TextColumn::make('description'),
                 ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_by.name'),
                 Tables\Columns\TextColumn::make('updated_by.name'),

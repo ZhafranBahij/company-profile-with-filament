@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('facebook_url')->nullable();

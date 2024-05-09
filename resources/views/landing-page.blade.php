@@ -16,13 +16,17 @@
         </style> --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            a {text-decoration: none; }
+
+        </style>
 
     </head>
     <body class="">
 
         <nav class="navbar navbar-expand-lg bg-primary " data-bs-theme="dark">
         <div class="container-fluid">
-              <a class="navbar-brand" href="#">MPW</a>
+              <a class="navbar-brand" href="#">{{ $company?->name ?? "PT Antah Berantah" }}</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -72,24 +76,17 @@
               {{-- <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button> --}}
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="5000">
-                <img src="{{ asset('img/bg-placeholder-2.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-flex flex-column justify-content-center text-white text-start" style="height: 100%;">
-                  <h2 class="fs-1" style="font-size: 100px">WIKA</h2>
-                  <p class="w-50">
-                    WIKA is a State-Owned Enterprise that has committed to reflects commitment and hard work of its workforce. We ensure sustainable growth in Engineering, Procurement, and Construction for Indonesia's future development.
-                  </p>
-                </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="5000">
-                <img src="{{ asset('img/bg-placeholder.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-flex flex-column justify-content-center text-white text-start" style="height: 100%;">
-                  <h2 class="fs-1" style="font-size: 100px">WIKA</h2>
-                  <p class="w-50">
-                    WIKA is a State-Owned Enterprise that has committed to reflects commitment and hard work of its workforce. We ensure sustainable growth in Engineering, Procurement, and Construction for Indonesia's future development.
-                  </p>
-                </div>
-              </div>
+                @foreach ($banners as $banner)
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="{{ asset($banner->image ? 'storage/'.$banner->image : 'img/bg-image-placeholder.jpg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-flex flex-column justify-content-center text-white text-start" style="height: 100%;">
+                      <h2 class="fs-1" style="font-size: 100px">{{ $banner->title ?? 'WIKA'  }}</h2>
+                      <p class="w-50">
+                        {{ $banner->description ?? 'Nothing in Here' }}
+                      </p>
+                    </div>
+                  </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -105,12 +102,12 @@
         <div class="container text-center d-flex flex-column justify-content-center text-white" style="min-height: 100vh; ">
             <div class="my-3">
                 <h2>
-                    Who We Are?
+                    {{ $about_us?->title ?? 'Who We Are?' }}
                 </h2>
             </div>
             <div class="my-3 d-flex justify-content-center">
                 <p class="w-50">
-                    WIKA is a State-Owned Enterprise that has committed to reflects commitment and hard work of its workforce. We ensure sustainable growth in Engineering, Procurement, and Construction for Indonesia's future development.
+                    {{ $about_us?->description ?? 'WIKA is a State-Owned Enterprise that has committed to reflects commitment and hard work of its workforce.' }}
                 </p>
             </div>
             <div>
@@ -206,7 +203,7 @@
 
         <div class="container my-5">
             <h2 class="my-3">
-                Member of PT Antah Berantah Group
+                Member of {{ $company?->name ?? "PT Antah Berantah" }} Group
             </h2>
             <div class="row">
                 @for ($i = 0; $i < 6; $i++)
@@ -231,47 +228,59 @@
                     </div>
                 </div>
                 <div>
-                    Copyright @ 2024 PT Antah Berantah
+                    Copyright @ 2024 {{ $company?->name ?? "PT Antah Berantah" }}
                 </div>
             </div>
             <hr class="text-white bg-white">
             <div class="d-flex justify-content-between container text-white p-3">
                 <div class="row">
                     <div class="col-6">
-                        <img src="{{asset('img/bg-placeholder.jpg')}}" style="height: 100px;" alt="" srcset="">
+                        <img src="{{asset($company?->image ? 'storage/'.$company?->image : 'img/bg-placeholder.jpg')}}" style="height: 100px;" alt="" srcset="">
                     </div>
                     <div class="col-6" >
                         <ul style="list-style-type: none;">
                             <li class="mb-2">
-                                JL. D.I. Panjaitan Kav. 9-10, Jakarta 13340
+                                {{ $company?->address ?? 'JL. D.I. Panjaitan Kav. 9-10, Jakarta 13340' }}
                             </li>
                             <li>
-                                Phone : +6221 8067 9200
+                                Phone : {{ $company?->phone_number ?? '12989842198' }}
                             </li>
                             <li>
-                                Fax: +6221 2289 3830
+                                Fax: {{ $company?->fax ?? '12989842198'}}
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-2">
-                        <i class='bx bxl-instagram' style="font-size: 50px"></i>
+                        <a href="{{ $company->instagram_url ?? 'https://www.instagram.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-instagram' style="font-size: 50px"></i>
+                        </a>
                     </div>
                     <div class="col-2">
-                        <i class='bx bxl-facebook' style="font-size: 50px"></i>
+                        <a href="{{ $company->facebook_url ?? 'https://www.facebook.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-facebook' style="font-size: 50px"></i>
+                        </a>
                     </div>
                     <div class="col-2">
-                        <i class='bx bxl-linkedin' style="font-size: 50px"></i>
+                        <a href="{{ $company->linkedin_url ?? 'https://www.linkedin.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-linkedin' style="font-size: 50px"></i>
+                        </a>
                     </div>
                     <div class="col-2">
-                        <i class='bx bxl-twitter'style="font-size: 50px"></i>
+                        <a href="{{ $company->twitter_url ?? 'https://www.twitter.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-twitter' style="font-size: 50px"></i>
+                        </a>
                     </div>
                     <div class="col-2">
-                        <i class='bx bxl-youtube'style="font-size: 50px"></i>
+                        <a href="{{ $company->youtube_url ?? 'https://www.youtube.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-youtube' style="font-size: 50px"></i>
+                        </a>
                     </div>
                     <div class="col-2">
-                        <i class='bx bxl-tiktok' style="font-size: 50px"></i>
+                        <a href="{{ $company->tiktok_url ?? 'https://www.tiktok.com/' }}" style="color:white;" target="_blank">
+                            <i class='bx bxl-tiktok' style="font-size: 50px"></i>
+                        </a>
                     </div>
                 </div>
             </div>

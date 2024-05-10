@@ -6,6 +6,7 @@ use App\Models\AboutUs;
 use App\Models\Article;
 use App\Models\Banner;
 use App\Models\Company;
+use App\Models\Faq;
 use App\Models\Partner;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -33,6 +34,9 @@ class LandingPageController extends Controller
         $partners = Partner::query()
                         ->get();
 
+        $faqs = Faq::query()
+                    ->get();
+
         return view('landing-page', [
             'company' => $company,
             'about_us' => $about_us,
@@ -40,6 +44,7 @@ class LandingPageController extends Controller
             'projects' => $projects,
             'articles' => $articles,
             'partners' => $partners,
+            'faqs' => $faqs,
         ]);
     }
 }

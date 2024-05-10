@@ -190,20 +190,48 @@
         </div>
         </div>
 
-        <div class="container my-5">
-            <h2 class="my-3">
-                Partner of {{ $company?->name ?? "PT Antah Berantah" }} Group
-            </h2>
-            <div class="row">
-                @forelse ($partners as $partner)
-                    <div class="col-2">
-                        <img src="{{ asset($partner->image ? 'storage/'.$partner->image : 'img/bg-image-placeholder.jpg') }}" style="width: 100%" alt="" srcset="">
+        <div class="container text-center d-flex flex-column justify-content-center text-white" style="min-height: 100vh;">
+            <div class="accordion" id="accordionExample">
+                <h2 class="text-black mb-3">
+                    Frequently Asked Question
+                </h2>
+                @forelse ($faqs as $item)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{ $item->question ?? '' }}
+                        </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {{ $item->answer ?? '' }}
+                        </div>
+                        </div>
                     </div>
                 @empty
-                    <p>
-
+                    <p class="text-black">
+                        Nothing in here
                     </p>
                 @endforelse
+              </div>
+        </div>
+
+        <div style="background-image: url({{ asset('img/bg-image-placeholder.jpg') }}); ">
+            <div class="container py-5">
+                <h2 class="my-3 text-white">
+                    Partner of {{ $company?->name ?? "PT Antah Berantah" }} Group
+                </h2>
+                <div class="row">
+                    @forelse ($partners as $partner)
+                        <div class="col-2">
+                            <img src="{{ asset($partner->image ? 'storage/'.$partner->image : 'img/bg-image-placeholder.jpg') }}" style="width: 100%" alt="" srcset="">
+                        </div>
+                    @empty
+                        <p>
+
+                        </p>
+                    @endforelse
+                </div>
             </div>
         </div>
 

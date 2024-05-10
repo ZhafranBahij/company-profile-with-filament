@@ -140,38 +140,22 @@
                 Our Signature Project
             </h2>
             <div class="row mt-5">
-                <div class="col-lg-3 col-md-6 col-12 card">
-                    <img src="{{ asset('img/bg-placeholder.jpg') }}" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Project 1</h5>
-                      <p class="card-text">Some quick example text to build on the Project 1 and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                @forelse ($projects as $project)
+                    <div class="col-lg-3 col-md-6 col-12 card">
+                        <img src="{{ asset($project->image ? 'storage/'.$project->image : 'img/bg-image-placeholder.jpg') }}" class="card-img-top">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ $project->title ?? 'Nothing in Here' }}</h5>
+                        <p class="card-text">
+                            {{ $project->short_description ?? "Nothing in Here, human!" }}
+                        </p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 card">
-                    <img src="{{ asset('img/bg-placeholder.jpg') }}" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Project 1</h5>
-                      <p class="card-text">Some quick example text to build on the Project 1 and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 card">
-                    <img src="{{ asset('img/bg-placeholder.jpg') }}" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Project 1</h5>
-                      <p class="card-text">Some quick example text to build on the Project 1 and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 card">
-                    <img src="{{ asset('img/bg-placeholder.jpg') }}" class="card-img-top">
-                    <div class="card-body">
-                      <h5 class="card-title">Project 1</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+                @empty
+                    <p>
+                        Nothing in here, because there is no data
+                    </p>
+                @endforelse
             </div>
         </div>
 
@@ -181,19 +165,24 @@
                 Latest Information
             </h2>
             <div class="row mt-5">
-                @for ($i = 0; $i < 4; $i++)
+                @forelse ($articles as $article)
                     <div class="col-lg-3 col-md-6 col-12 card">
                         <a href="#">
-                            <img src="{{ asset('img/bg-placeholder-2.jpg') }}" class="card-img-top">
+                            <img src="{{ asset($article->image ? 'storage/'.$article->image : 'img/bg-image-placeholder.jpg') }}" class="card-img-top">
                         </a>
                         <div class="card-body text-start">
-                        <span class=" card-text text-black opacity-50"> 06 May 2024 </span>
+                        <span class=" card-text text-black opacity-50"> {{ $article->created_at ?? 'No Date' }}</span>
                         {{-- <h5 class="card-title">Project 1</h5> --}}
-                        <p class="card-text">PT Antah Berantah Created a New Innovation in Science and Technology</p>
+                        <p class="card-text">{{ $article->title ?? 'No Title' }}</p>
                         {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                         </div>
                     </div>
-                @endfor
+                @empty
+                    <p>
+                        Nothing in here, because there is no data
+                    </p>
+                @endforelse
+
             </div>
             <div>
                 <a href="#" class="btn btn-primary mt-5 w-25">Read More</a>
@@ -203,14 +192,18 @@
 
         <div class="container my-5">
             <h2 class="my-3">
-                Member of {{ $company?->name ?? "PT Antah Berantah" }} Group
+                Partner of {{ $company?->name ?? "PT Antah Berantah" }} Group
             </h2>
             <div class="row">
-                @for ($i = 0; $i < 6; $i++)
+                @forelse ($partners as $partner)
                     <div class="col-2">
-                        <img src="{{asset('img/bg-placeholder.jpg')}}" style="width: 100%" alt="" srcset="">
+                        <img src="{{ asset($partner->image ? 'storage/'.$partner->image : 'img/bg-image-placeholder.jpg') }}" style="width: 100%" alt="" srcset="">
                     </div>
-                @endfor
+                @empty
+                    <p>
+
+                    </p>
+                @endforelse
             </div>
         </div>
 

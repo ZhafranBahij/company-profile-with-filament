@@ -31,11 +31,17 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required(),
-                Forms\Components\Select::make('role')
-                    ->options([
-                        'admin' => 'admin',
-                        'user' => 'user',
-                    ])
+                // Forms\Components\Select::make('role')
+                //     ->options([
+                //         'admin' => 'admin',
+                //         'user' => 'user',
+                //     ])
+                // Using Select Component
+                Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
                     ->required(),
             ]);
     }

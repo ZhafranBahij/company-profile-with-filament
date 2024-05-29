@@ -9,15 +9,16 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
+    use HasRoles;
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->role == 'admin' || $this->role == 'true admin';
-    }
+    use HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
